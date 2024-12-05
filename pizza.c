@@ -109,15 +109,19 @@ void editarIngrediente(struct formatoPizzas *pizza, int* quantidadePizzas,int po
             pizza[pos].ingredientes[i].nome[strcspn(pizza[pos].ingredientes[i].nome,"\n")]='\0';
             
             for (int k=0;k<*quantidadeIG;k++){
+                //printf ("debug1: %s\n",pizza[pos].ingredientes[i].nome);
+                //printf ("debug2: %s\n",ingrediente[k].nome);
                 if (strcmp(pizza[pos].ingredientes[i].nome,ingrediente[k].nome)==0){// se nome digitado == nome de um IG
                     pizza[pos].ingredientes[i].preco=ingrediente[k].preco; //preco do ingrediente == preco do IG
                     pizza[pos].ingredientes[i].id=ingrediente[k].id; //id do ingrediente == id do IG
+                    k=*quantidadeIG;
+                    cnt=0;
                 }else{ //se for um ingrediente novo
                     cnt=1;
                 }
             }
             
-            if (cnt=1){ //se for um ingrediente novo
+            if (cnt==1){ //se for um ingrediente novo
                 printf("Ingrediente novo\n");
                 
                 printf("Digite o preco do ingrediente: RS ");
@@ -136,6 +140,7 @@ void editarIngrediente(struct formatoPizzas *pizza, int* quantidadePizzas,int po
                 igStructParaArquivo(ingrediente, quantidadeIG); //atualiza o arquivo de IG com base no Struct
             }
             printf ("Nome alterado\n");
+            
         }
     }
 } //editar ingredientes da pizza
